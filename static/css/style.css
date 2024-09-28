@@ -1,0 +1,66 @@
+.img50 {
+    width:50%; border: 1px solid #292929;
+}
+
+.annotation{
+    font-size: 12px;
+}
+
+.btn {
+    display: block;
+    text-decoration: none;
+    width: 120px;
+    height: 40px;
+    font-weight: bold;
+    border: 2px solid #27acd9;
+    background: #27acd9;
+    color: #fff;
+    border-radius: 100vh;
+    transition: 0.5s;
+}
+
+.btn:hover {
+    color: #27acd9;
+    background: #fff;
+    cursor: pointer;
+}
+
+/* 019 */
+.button019 a {
+    background: #eee;
+    border-radius: 3px;
+    position: relative;
+    justify-content: space-around;
+    max-width: 250px;
+    padding: 15px 45px;
+    color: #313131;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+}
+
+.button019 a:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    bottom: 0;
+    right: 2rem;
+    font-size: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: right 0.3s;
+    width: 6px;
+    height: 6px;
+    border-top: solid 2px currentColor;
+    border-right: solid 2px currentColor;
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.button019 a:hover {
+    background: #6bb6ff;
+    color: #FFF;
+}
+
+.button019 a:hover:after {
+    right: 1.4rem;
+}

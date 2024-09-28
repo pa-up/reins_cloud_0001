@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>REINS一括取得</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+        <script language="javascript" type="text/javascript">
+            function OnButtonClick() {
+                target = document.getElementById("js_output");
+                target.innerHTML = "<br><h3>実行中〜少々お待ちください</h3>";
+            }
+        </script>
+    </head>
+
+    <body style="padding: 10px 30px;">
+        <h1>REINS一括取得</h1>
+        <p style="margin-top: 40px;"></p>
+
+        <!-- フォームに関するUI -->
+        <h3>スクレイピングのオプション</h3>
+        <form action="/" method="POST" id="ajax-result">
+            <input type="hidden" name="start_scraping" value="true">
+            <p>
+                ユーザID<br>
+                <input type="text" name="user_id" value="">
+            </p>
+            <p>
+                パスワード<br>
+                <input type="text" name="password" value="">
+            </p>
+            <p>
+                検索方法を選択<br>
+                <select name="search_method">
+                    <option value="01">01: レジ錦糸町〜津田沼９分１．３〜２億</option>
+                    <option value="02">02: レジ総武線１０分５，０００万〜２億</option>
+                    <option value="03">03: レジ錦糸町〜稲毛２０分１．３〜２億</option>
+                    <option value="04">04: ■土地 錦糸町〜稲毛２０分０．５〜１．３億</option>
+                </select>
+            </p>
+            <p>
+                ブラウジングの様子を目視するか否か<br>
+                <input type="radio" name="browse_visually" value="yes"> 目視する
+                <input type="radio" name="browse_visually" value="no"> 目視しない
+                <div class = "annotation">
+                    ブラウジングの様子を目視しない方が処理速度が若干上がりますが、
+                    <br>「目視する」を選択することで、処理の正しさを確認できます。
+                </div>
+            </p>
+            <button type="submit" class="btn" onclick="OnButtonClick();" style="margin-top: 30px;">取得開始</button>
+            <p></p>
+            {% if not csv_path_from_static %}
+                <div id="js_output"></div>
+            {% endif %}
+        </form>
+        <p><br></p>
+        
+        <script>
+            document.getElementById("ajax-result").addEventListener("submit", function () {
+                $('.btn').remove();
+            });
+        </script>
+        <!-- フォームに関するUIここまで -->
+
+
+
+        {% if csv_path_from_static %}
+            <h3>正常に取得できました</h3>
+            <div class="button019">
+                <a href="{{ url_for('download') }}">CSV形式でダウンロード</a>
+            </div>
+            <p><br></p>
+        {% endif %}
+
+        
+        <!-- WEBアプリの利用方法 -->
+        <!-- <h2>ツールの利用方法</h2> -->
+        <!-- <img src="{{ url_for('static', filename = img_path_from_static + 'searched_place.png') }}" class="img50">
+        <p>
+            今回はサンプルのツールとして、「おすすめ特集からヘアサロンを探す」の中にあるサロンを抽出します。
+            <br>
+            ご要望に従って、抽出仕様を決定致します。
+        </p>
+        <p><br></p>
+
+        <img src="{{ url_for('static', filename = img_path_from_static + 'salon_list.png') }}" class="img50">
+        <p>
+            また、上の画像のように表示されるサロンのリストが複数ページに渡って表示されますが、
+            <br>
+            今回は3ページ分のみを取得しています。
+            <br>
+            本番では全ページ（100〜200ページ以上など）のクロールも致します。
+        </p>
+        <img src="{{ url_for('static', filename = img_path_from_static + 'page_number.png') }}" class="img50">
+        
+        <p><br></p>
+        <p>このツールを使うことで下記のような表がCSV形式で出力されます。</p>
+        <img src="{{ url_for('static', filename = img_path_from_static + 'csv.png') }}" class="img50"> -->
+
+        <p><br><br></p>
+        
+    </body>
+
+</html>
