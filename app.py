@@ -198,6 +198,7 @@ class Reins_Scraper:
         # ログインボタンをクリック
         login_button = self.wait_driver.until(EC.element_to_be_clickable((By.ID, "login-button")))
         login_button.click()
+        time.sleep(2)
 
         # フォームにログイン認証情報を入力
         user_id_form = self.wait_driver.until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='text']")))
@@ -215,9 +216,11 @@ class Reins_Scraper:
         # ボタン「売買 物件検索」をクリック
         sold_building_search_button = self.wait_driver.until(EC.presence_of_element_located((By.XPATH, "//button[contains(text(), '売買') and contains(text(), '物件検索')]")))
         sold_building_search_button.click()
+        time.sleep(2)
         # 検索条件を取得
         display_search_method_link = self.wait_driver.until(EC.presence_of_element_located((By.XPATH, "(//div[@class='card p-card'])[1]"))).find_element(By.XPATH, ".//a[contains(span, '検索条件を表示')]")
         display_search_method_link.click()
+        time.sleep(2)
         # 検索条件のリストを取得
         select_element = self.wait_driver.until(EC.presence_of_element_located((By.XPATH, "//div[@class='p-selectbox']//select")))
         search_method_element_list = select_element.find_elements(By.TAG_NAME, "option")
@@ -226,13 +229,16 @@ class Reins_Scraper:
             solding_search_method_list.append( search_method_element.text )
         # 前のページに戻る
         self.driver.back()
+        time.sleep(2)
 
         # ボタン「売買 物件検索」をクリック
         rental_building_search_button = self.wait_driver.until(EC.presence_of_element_located((By.XPATH, "//button[contains(text(), '賃貸') and contains(text(), '物件検索')]")))
         rental_building_search_button.click()
+        time.sleep(2)
         # 検索条件を取得
         display_search_method_link = self.wait_driver.until(EC.presence_of_element_located((By.XPATH, "(//div[@class='card p-card'])[1]"))).find_element(By.XPATH, ".//a[contains(span, '検索条件を表示')]")
         display_search_method_link.click()
+        time.sleep(2)
         # 検索条件のリストを取得
         select_element = self.wait_driver.until(EC.presence_of_element_located((By.XPATH, "//div[@class='p-selectbox']//select")))
         search_method_element_list = select_element.find_elements(By.TAG_NAME, "option")
@@ -241,6 +247,7 @@ class Reins_Scraper:
             rental_search_method_list.append( search_method_element.text )
         # 前のページに戻る
         self.driver.back()
+        time.sleep(2)
         return solding_search_method_list , rental_search_method_list
         
     def scraping_solding_list(self , search_method_value: str , index_of_search_requirement: int):
@@ -251,15 +258,17 @@ class Reins_Scraper:
         else:
             building_search_button = self.wait_driver.until(EC.presence_of_element_located((By.XPATH, "//button[contains(text(), '賃貸') and contains(text(), '物件検索')]")))
             building_search_button.click()
+        time.sleep(2)
 
         # 売買検索条件を選択
         display_search_method_link = self.wait_driver.until(EC.presence_of_element_located((By.XPATH, "(//div[@class='card p-card'])[1]"))).find_element(By.XPATH, ".//a[contains(span, '検索条件を表示')]")
         display_search_method_link.click()
+        time.sleep(2)
         choice_search_method = Select(self.wait_driver.until(EC.presence_of_element_located((By.XPATH, "//div[@class='p-selectbox']//select"))))
         choice_search_method.select_by_index(index_of_search_requirement)
         get_button = self.wait_driver.until(EC.presence_of_element_located((By.XPATH, "//button[contains(text(), '読込')]")))
         get_button.click()
-        time.sleep(0.5)
+        time.sleep(2)
 
         # 検索条件が存在するか判定
         exist_search_requirement_sentence = self.wait_driver.until(EC.presence_of_element_located((By.CSS_SELECTOR, '[class*="modal"]'))).text
@@ -277,7 +286,7 @@ class Reins_Scraper:
         search_button.click()
 
         # 物件リストが何ページあるかを判定
-        time.sleep(1)
+        time.sleep(2)
         page_count_info = self.wait_driver.until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.card-header"))).text
         match = re.search(r'(\d+)件', page_count_info)
         total_number = int( match.group(1) )
@@ -290,6 +299,7 @@ class Reins_Scraper:
             # 印刷表示ボタンをクリック
             print_button = self.wait_driver.until(EC.presence_of_element_located((By.XPATH, "//button[contains(text(), '印刷')]")))
             print_button.click()
+            time.sleep(2)
             
             # 現在のページのHTML要素を取得
             table_tag_str = self.wait_driver.until(EC.presence_of_element_located((By.TAG_NAME, "table"))).get_attribute('outerHTML')
@@ -310,7 +320,7 @@ class Reins_Scraper:
                 # リストの表示ページへ戻る
                 back_button = self.wait_driver.until(EC.element_to_be_clickable((By.CLASS_NAME, 'p-frame-backer')))
                 back_button.click()
-                time.sleep(0.5)
+                time.sleep(1)
                 # 次のリストを表示させるボタンをクリック
                 next_list_button = self.wait_driver.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'li.page-item > button > span.p-pagination-next-icon')))
                 next_list_button.click()
