@@ -1,7 +1,5 @@
 from flask import Flask, render_template, request , send_file, render_template_string
 import os
-import threading,webbrowser
-import sys
 import csv
 import time
 import re
