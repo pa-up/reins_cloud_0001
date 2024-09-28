@@ -209,6 +209,7 @@ class Reins_Scraper:
         time.sleep(0.5)
         login_button = self.wait_driver.until(EC.presence_of_element_located((By.XPATH, "//button[contains(text(), 'ログイン')]")))
         login_button.click()
+        time.sleep(2)
 
     def get_solding_or_rental_option(self):
         # ボタン「売買 物件検索」をクリック
